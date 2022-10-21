@@ -1,0 +1,34 @@
+### Metadata individual characteristics ###############################################
+
+# By Catherine Čapkun-Huot
+
+# Date: 20-10-2022
+
+
+### Data information ###############################################
+
+# Data collected by participants of the Chipmunk Project
+
+# The Chipmunk Project is a long-term research project happening in the Green Mountains Nature Reserve of the Nature Conservancy Canada, Eastern Townships, Québec, Canada, since 2005
+
+
+### File information ###############################################
+
+# Ind_caract.csv contains one row per focal chipmunk 
+
+# Each column gives information (sex, personality...) on the 40 focal chipmunks that were exposed to the FID treatments
+
+
+### File columns ###################################################
+
+# ID: Chipmunk identity, starts with the letter representing the year the chipmunk was first captured (e.g., Q = 2020, R = 2021) and ends with a number (given in order of capture), categorical variable
+
+# Risk: One of the three approach speeds (in BPM ; e.g., 20 BPM = 1 step every 3 seconds which is approximately 0.17 m/s), 20 (low risk) / 40 (medium risk) / 60 (high risk), categorical variable
+
+# Docility: Time spent immobile in a handling bag during 60 seconds (in seconds; value for the first docility test of 2021), 0-60, continuous variable
+
+# Exploration: Number of lines crossed in an open-field during 90 seconds (value for the first open-field test of an individual), continuous variable 
+
+# Sex: Chipmunk sex, M (Male) / F (Female), categorical variable
+
+# Number_captures: Total number of times the chipmunk was captured in a trap before the test, continuous variable 

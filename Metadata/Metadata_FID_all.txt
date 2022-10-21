@@ -1,0 +1,51 @@
+
+### Metadata FID ###################################################
+
+# By Catherine Čapkun-Huot
+
+# Date: 20-12-2021
+
+
+### Data information ###############################################
+
+# Data collected by Catherine Čapkun-Huot and Roxane Hutchings-Baudin
+
+# Data collected from June 9 to July 16, 2021
+
+# Data collected in the Green Mountains Nature Reserve of the Nature Conservancy Canada, Eastern Townships, Québec, Canada
+
+
+### File information ###############################################
+
+# Data_FID.csv is the raw FID data collected 
+
+# Data_FID_analyses.csv is the data used for the analyses: we removed 20 observations from Data_FID.csv because (1) the approach was not the cause of flight, (2) the flight was caused by the walker stumbling upon an object while approaching, (3) an observation was not flight per se, or (4) the distance was not correctly measured [see R code "Data_cleaning.R"]
+
+
+### File columns ###################################################
+
+# Site: One of the three study sites, MV1/MV4/MV5, categorical variable
+
+# Day: Day when the measure was taken, date variable 
+
+# Month: Month when the measure was taken, 06/07, date variable 
+
+# Year: Year when the measure was taken, all 2021, date variable 
+
+# Date: Complete date, date variable
+
+# Annual_julian_day: Day number since the beginning of the year (January 1st 2021), 168-205, continuous variable 
+
+# Observer: Identity of the observer who took the measure, CCH/RHB, categorical variable
+
+# ID: Chipmunk identity, starts with the letter representing the year the chipmunk was first captured (e.g., Q = 2020, R = 2021) and ends with a number (given in order of capture), categorical variable
+
+# Serie_number: Day the measure was taken (first = 1, second = 2, third = 3 ; the dates are different between chipmunks), 1-3, categorical variable
+
+# obs_number: Trial number (first test = 0, second test = 1, ... ; for each individual ), 0-15, continuous variable
+
+# Time: Time of the day, time variable
+
+# Approach_speed: One of the three approach speeds (in BPM ; e.g., 20 BPM = 1 step every 3 seconds which is approximately 0.17 m/s), 20/40/60, categorical variable
+
+# FID: Flight-initiation distance (distance from the observer at which the chipmunk escapes; in cm), >/= 0 and < 1000, continuous variable
