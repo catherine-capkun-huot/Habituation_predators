@@ -1,0 +1,11 @@
+---
+title: "Assessing model fit"
+format: html
+author: Andrew MacDonald and Catherine Čapkun-Huot
+theme: minty
+bibliography: references.bib
+comments: 
+  hypothesis: true
+code-fold: true
+---
+

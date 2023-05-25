@@ -125,7 +125,7 @@ priors <- c(prior(lkj(2), class = "cor"),
             prior(exponential(2),   class = "sd", nlpar = "logitp"),
             prior(normal(1.5, .5),  class = "b",  nlpar = "logd"),
             prior(normal(.5,.5),    class = "b",  nlpar = "logitM"),
-            prior(normal(-1, .2),   class = "b",  nlpar = "logitp"),
+            prior(normal(1, .2),   class = "b",  nlpar = "logitp"),
             prior(gamma(6.25, .25), class = "shape"))
 
 # Run model 1
