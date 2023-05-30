@@ -9,3 +9,101 @@ comments:
 code-fold: true
 ---
 
+In this paper we present a new model for Flight Initiation distance (FID). This model captures the process of habituation in three parameters (see Appendix 3). However, this model contrasts with the log-linear models common in the literature, for example as used by Allan et al. [-@allan2020]
+
+```{r message=FALSE}
+library(brms)
+library(tidyverse)
+# Load FID data - data_FID_analyses.csv -, each row is a FID trial
+data_FID <- read.csv(here::here("Data/data_FID_analyses.csv"), 
+                     header = TRUE, 
+                     sep = ",")
+
+# Data structure
+data_FID <- tibble(ID      = as.factor(data_FID$ID),
+                   num_obs = as.numeric(data_FID$obs_number),
+                   FID     = as.numeric(data_FID$FID + 0.01), # gamma distribution needs values > 0 
+                   risk    = as.factor(data_FID$Approach_speed))
+```
+
+```{r}
+# Formula
+form_fit1 <- bf(FID    ~ inv_logit(logitM) * 1000 * (1 - inv_logit(logitp)*num_obs/(exp(logd) + num_obs)),
+                logitM ~ 1 + risk + (1 |t| ID),
+                logitp ~ 1 + risk + (1 |t| ID),
+                logd   ~ 1 + risk + (1 |t| ID),
+                nl     = TRUE,
+                family = Gamma(link = "identity"))
+
+# Assign priors
+priors <- c(prior(lkj(2), class = "cor"),
+            prior(exponential(2),   class = "sd", nlpar = "logd"),
+            prior(exponential(2),   class = "sd", nlpar = "logitM"),
+            prior(exponential(2),   class = "sd", nlpar = "logitp"),
+            prior(normal(1.5, .5),  class = "b",  nlpar = "logd"),
+            prior(normal(.5,.5),    class = "b",  nlpar = "logitM"),
+            prior(normal(1, .2),   class = "b",  nlpar = "logitp"),
+            prior(gamma(6.25, .25), class = "shape"))
+
+# Run model 1
+fit1 <- brm(form_fit1,
+            data        = data_FID,
+            prior       = priors,
+            seed        = 1234,
+            adapt_delta = 0.95,
+            core        = 4,
+            iter        = 2000,
+            backend     = "cmdstanr",
+            file        = here::here("Appendix_1/fit1.rds"),
+            file_refit  = "on_change")
+```
+
+```{r}
+## contrast this with a log model
+form_loglin <- bf(log(FID) ~ 1 + num_obs + risk + risk:num_obs + (1 + num_obs | ID),
+                family = gaussian())
+
+
+prior_loglin <- c(
+  prior(normal(0, .5), class = "b"),
+  prior(normal(0, .5), class = "Intercept"),
+  prior(lkj(2), class = "cor"),
+  prior(exponential(2), class = "sd"),
+  prior(exponential(1), class = "sigma")
+)
+
+fit_loglin <-  brm(form_loglin,
+                   data        = data_FID,
+                   prior       = prior_loglin,
+                   seed        = 1234,
+                   adapt_delta = 0.95,
+                   core        = 4,
+                   iter        = 2000,
+                   backend     = "cmdstanr",
+                   file        = here::here("Appendix_1/fit_loglin"), 
+                   file_refit  = "on_change")
+```
+
+And compare both
+
+```{r}
+#| label: fig-comp
+#| fig-cap: comparison of our model with a log-linear model, which is a common alternative for analyzing FID data. Dark blue lines indicate the observed data, light blue lines are simulated observations from the posterior predictive distribution.
+#| fig-subcap: 
+#|   - Linear model on log-transformed FID data.
+#|   - Our proposed Model 1, fit to the same data.
+#| layout-ncol: 2
+
+# summary(fit1)
+
+
+p1 <- brms::pp_check(fit_loglin, "dens_overlay") + 
+  labs(title = "Log-transformed linear model")
+
+p2 <- brms::pp_check(fit1, "dens_overlay") + 
+  labs(title = "Model 1 from Čapkun-Huot et al.")
+
+p1
+p2
+
+```
