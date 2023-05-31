@@ -151,6 +151,7 @@ div.csl-indent {
 </header>
 
 <p>In this paper we present a new model for Flight Initiation distance (FID). This model captures the process of habituation in three parameters (see Appendix 3). However, this model contrasts with the log-linear models common in the literature, for example as used by Allan et al. <span class="citation" data-cites="allan2020">(<a href="#ref-allan2020" role="doc-biblioref">2020</a>)</span></p>
+<p>In order to asses fit of our model and compare it to a log-linear model, we use posterior predictive checks. Posterior predictive checks are key components of a Bayesian workflow <span class="citation" data-cites="gabry2019">(<a href="#ref-gabry2019" role="doc-biblioref">Gabry et al. 2019</a>)</span>. In a posterior predictive check, we simulate observations using the model and compare these to the original data. A model that fits the data well should generate predictions that closely resemble that data.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -230,7 +231,6 @@ div.csl-indent {
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>                   <span class="at">file_refit  =</span> <span class="st">"on_change"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>And compare both</p>
 <div>
 <details>
 <summary>Code</summary>
@@ -280,11 +280,15 @@ div.csl-indent {
 </figure>
 </div>
 </div>
+<p>Figure 1 shows the fit between our model and the log-linear model which is common in studies of FID. The log-linear approach represents the average well, but overestimates the variance in FID. In contrast, our model captures variance well, though it underestimates slightly the mode of the dataset.</p>
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-allan2020" class="csl-entry" role="doc-biblioentry">
 Allan, Andrew T. L., Annie L. Bailey, and Russell A. Hill. 2020. <span>“Habituation Is Not Neutral or Equal: Individual Differences in Tolerance Suggest an Overlooked Personality Trait.”</span> <em>Science Advances</em> 6 (28): eaaz0870. <a href="https://doi.org/10.1126/sciadv.aaz0870">https://doi.org/10.1126/sciadv.aaz0870</a>.
+</div>
+<div id="ref-gabry2019" class="csl-entry" role="doc-biblioentry">
+Gabry, Jonah, Daniel Simpson, Aki Vehtari, Michael Betancourt, and Andrew Gelman. 2019. <span>“Visualization in Bayesian Workflow.”</span> <em>Journal of the Royal Statistical Society: Series A (Statistics in Society)</em> 182 (2): 389–402. <a href="https://doi.org/10.1111/rssa.12378">https://doi.org/10.1111/rssa.12378</a>.
 </div>
 </div></section></div></main>
 <!-- /main column -->

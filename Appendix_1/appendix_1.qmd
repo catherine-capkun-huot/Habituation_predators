@@ -11,6 +11,8 @@ code-fold: true
 
 In this paper we present a new model for Flight Initiation distance (FID). This model captures the process of habituation in three parameters (see Appendix 3). However, this model contrasts with the log-linear models common in the literature, for example as used by Allan et al. [-@allan2020]
 
+In order to asses fit of our model and compare it to a log-linear model, we use posterior predictive checks. Posterior predictive checks are key components of a Bayesian workflow [@gabry2019]. In a posterior predictive check, we simulate observations using the model and compare these to the original data. A model that fits the data well should generate predictions that closely resemble that data.
+
 ```{r message=FALSE}
 library(brms)
 library(tidyverse)
@@ -84,8 +86,6 @@ fit_loglin <-  brm(form_loglin,
                    file_refit  = "on_change")
 ```
 
-And compare both
-
 ```{r}
 #| label: fig-comp
 #| fig-cap: comparison of our model with a log-linear model, which is a common alternative for analyzing FID data. Dark blue lines indicate the observed data, light blue lines are simulated observations from the posterior predictive distribution.
@@ -107,3 +107,5 @@ p1
 p2
 
 ```
+
+Figure 1 shows the fit between our model and the log-linear model which is common in studies of FID. The log-linear approach represents the average well, but overestimates the variance in FID. In contrast, our model captures variance well, though it underestimates slightly the mode of the dataset.
