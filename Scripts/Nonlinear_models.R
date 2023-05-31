@@ -77,7 +77,7 @@ fake_tamia_id_epred |>
 # Data --------------------------------------------------------------------
 
 # Load FID data - data_FID_analyses.csv -, each row is a FID trial
-data_FID <- read.csv("data_FID_analyses.csv", 
+data_FID <- read.csv("Data/data_FID_analyses.csv", 
                      header = TRUE, 
                      sep = ",")
 
@@ -91,7 +91,7 @@ data_FID <- tibble(ID      = as.factor(data_FID$ID),
 levels(data_FID$risk) <- list(Low  = "20", Medium = "40", High = "60")
 
 # Load individual characteristics data - ind_charact.csv -, each row is an individual 
-data_ind <- read.csv("ind_charact.csv", 
+data_ind <- read.csv("Data/ind_charact.csv", 
                      header = TRUE, 
                      sep = ";")
 
